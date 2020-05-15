@@ -4,6 +4,7 @@
     <title> Whiteboard </title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <!-- <script>src = "script.js"</script> -->
+    <link href="style.css" rel = "stylesheet">
   </head>
   <body>
     <h1> Whiteboard </h1>
@@ -12,12 +13,18 @@
       <label>Color</label>
       <input type = "color" id = "colors">
       <label>Brush Size</label>
-      <input type = "range" id = "brushsize" min="0" max="20" value="0">
+      <input type = "range" id = "brushsize" min="1" max="20" value="1">
       <button type = "button" id = "clear">clear</button>
+      <button type = "button" id = "eraser">eraser</button>
+      <button type = "button" id = "brush">brush</button>
+      <button type = "button" id = "rectangle">rectangle</button>
+      <button type = "button" id = "circle">circle</button>
+      <button type = "button" id = "undo">undo</button>
+      <button type = "button" id = "redo">redo</button>
       </form>
     </div>
     <br>
-    <canvas id="whiteboard" width="800" height="400" style="border:1px solid black;">
+    <canvas id="whiteboard" class = "center" width="800" height="400" style="border:1px solid black;">
     </canvas>
         <script src= "script.js"></script>
 
