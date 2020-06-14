@@ -2,31 +2,38 @@
 <html>
   <head>
     <title> Whiteboard </title>
+    <script src="https://kit.fontawesome.com/e9c9dab9d9.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <!-- <script>src = "script.js"</script> -->
     <link href="style.css" rel = "stylesheet">
   </head>
   <body>
     <h1> Whiteboard </h1>
-    <div class = "toolbar">
       <form>
-      <label>Color</label>
+      <label><i class="fas fa-palette"></i></label>
       <input type = "color" id = "colors">
+      <!-- <div class="dropdown">
+        <button type = "button" class="dropbtn" >Brush Size</button>
+        <div id="myDropdown" class="dropdown-content">
+          <input type = "range" id = "brushsize" min="1" max="20" value="1">
+        </div>
+      </div> -->
       <label>Brush Size</label>
       <input type = "range" id = "brushsize" min="1" max="20" value="1">
       <button type = "button" id = "clear">clear</button>
-      <button type = "button" id = "eraser">eraser</button>
-      <button type = "button" id = "brush">brush</button>
-      <button type = "button" id = "rectangle">rectangle</button>
-      <button type = "button" id = "circle">circle</button>
-      <button type = "button" id = "undo">undo</button>
-      <button type = "button" id = "redo">redo</button>
+      <button type = "button" id = "brush"><i class="fas fa-pen"></i></button>
+      <button type = "button" id = "eraser"><i class="fas fa-eraser"></i></button>
+      <button type = "button" id = "rectangle"><i class="far fa-square"></i></button>
+      <button type = "button" id = "circle"><i class="far fa-circle"></i></button>
+      <button type = "button" id = "undo"><i class="fas fa-undo"></i></button>
+      <button type = "button" id = "redo"><i class="fas fa-redo"></i></button>
       </form>
-    </div>
     <br>
-    <canvas id="whiteboard" class = "center" width="800" height="400" style="border:1px solid black;">
+    <div class="wb">
+    <canvas id="whiteboard" width="1900" height="800">
     </canvas>
-        <script src= "script.js"></script>
+    </div>
+    <script src= "script.js"></script>
 
   </body>
 </html>

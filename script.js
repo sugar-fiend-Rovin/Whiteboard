@@ -6,11 +6,13 @@ circle = false;
 var previous;
 var starting_x;
 var starting_y;
+var radius = 0;
 var undo = [$("#whiteboard")[0].toDataURL()];
 var redo = [];
 var width = 0;
 var height = 0;
 var offset = $("#whiteboard").offset();
+
 $(document).ready(function(){
   $("#whiteboard").on({
 
@@ -19,12 +21,13 @@ $(document).ready(function(){
     mousedown = true;
     redo = [];
     context.moveTo(event.pageX- offset.left,event.pageY - offset.top);
+    context.beginPath();
     if( rectangle || circle)
     {
       starting_x = event.pageX- offset.left;
       starting_y = event.pageY - offset.top;
     }
-    context.beginPath();
+    // context.beginPath();
     if (!eraser) {
       context.strokeStyle = $("#colors")[0].value;
     }
@@ -36,6 +39,7 @@ $(document).ready(function(){
     mousedown = false;
     width = 0;
     height = 0;
+    radius = 0;
     undo.push($("#whiteboard")[0].toDataURL());
 
     },
@@ -44,15 +48,28 @@ $(document).ready(function(){
     mousemove: function(event){
       if (mousedown == true) {
         if (rectangle) {
-          context.clearRect(starting_x, starting_y, width, height);
-          context.strokeRect(starting_x, starting_y, event.pageX-offset.left - starting_x, event.pageY - offset.top - starting_y);
-          width = event.pageX-offset.left - starting_x;
-          height = event.pageY - offset.top - starting_y;
+          if (width < 0 && height < 0) {
+            context.clearRect(starting_x + 1, starting_y + 1, width -2, height - 2);
+          } else if (width < 0) {
+            context.clearRect(starting_x + 1, starting_y - 1, width - 2, height + 2);
+          } else if (height < 0) {
+            context.clearRect(starting_x - 1, starting_y + 1, width + 2, height - 2);
+          } else{
+            context.clearRect(starting_x - 1, starting_y - 1, width + 2, height + 2);
+          }
+          width = event.pageX - offset.left - starting_x;
+          height = event.pageY - offset.top- starting_y;
+          context.strokeRect(starting_x, starting_y, width, height);
+
 
         } 
         else if (circle) {
-          context.arc(starting_x, starting_y, Math.hypot(event.pageX-offset.left - starting_x,event.pageY - offset.top - starting_y), 0, 2 * Math.PI);
+          context.beginPath();
+          context.clearRect(starting_x - radius - 1, starting_y - radius - 1, radius * 2 + 2, radius * 2 + 2);
+          radius = Math.hypot(event.pageX-offset.left - starting_x,event.pageY - offset.top - starting_y);
+          context.arc(starting_x, starting_y, Math.hypot(event.pageX-offset.left - starting_x,event.pageY - offset.top - starting_y), 0, 2*Math.PI,false);
           context.stroke();
+          context.closePath();
         }
         else {
           context.lineTo(event.pageX-offset.left,event.pageY - offset.top);
@@ -64,7 +81,7 @@ $(document).ready(function(){
 
   //clear button
   $("#clear").click(function(){
-    context.clearRect(0, 0, 800, 400);
+    context.clearRect(0, 0, 1900, 800);
   });
 
   //eraser
@@ -85,16 +102,18 @@ $(document).ready(function(){
 
   // draw rectangles
   $("#rectangle").click(function(){
-    if (eraser) {
+    if (eraser || circle) {
       eraser = false;
+      circle = false;
     }
     rectangle = true;
   });
 
   // draw circles
   $("#circle").click(function(){
-    if (eraser) {
+    if (eraser || rectangle) {
       eraser = false;
+      rectangle = false;
     }
     circle = true;
   });
@@ -108,8 +127,8 @@ $(document).ready(function(){
       undo.push(dataURL)
       var image = new Image();
       image.onload = function(){
-        context.clearRect(0, 0, 800, 400);
-        context.drawImage(image,0, 0, 800, 400);
+        context.clearRect(0, 0, 1900, 800);
+        context.drawImage(image,0, 0, 1900, 800);
       };
       image.src = dataURL;
     }
@@ -122,10 +141,22 @@ $(document).ready(function(){
     undo.push(dataURL);
     var image = new Image();
     image.onload = function(){
-      context.clearRect(0, 0, 800, 400);
-      context.drawImage(image,0, 0, 800, 400);
+      context.clearRect(0, 0, 1900, 800);
+      context.drawImage(image,0, 0, 1900, 800);
     };
     image.src = dataURL;
     }
   });
+
+  $(".dropbtn").click(function(){
+    $("myDropdown").classList.toggle("show");
+  });
+
+  // $(window).click(function(event){
+  //   if (!event.target.matches('.dropbtn')) {
+  //   if ($(".dropdown-content")[0].classList.contains('show')){
+  //     $(".dropdown-content")[0].classList.removes('show');
+  //   }
+  // }
+  // });
 });
