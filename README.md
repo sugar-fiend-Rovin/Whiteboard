@@ -1,3 +1,4 @@
+#WhiteBoard
 This a whiteboard with some basic features.
 
 There are seven buttons, a color picker, and slider from left to right on top of the canvas
