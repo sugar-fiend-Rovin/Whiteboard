@@ -2,21 +2,21 @@
 This a whiteboard with some basic features.
 
 There are seven buttons, a color picker, and slider from left to right on top of the canvas
+![Screenshot 2020-09-30 164001](https://user-images.githubusercontent.com/60533447/94750954-29415280-033c-11eb-8218-31ec410f16f6.png)
+1. Clear All
 
-The first button starting on the left is the clear button which will clear the entire canvas of any drawing
+2. Drawing Tool
 
-The second button us the marker button which will switch to the drawing tool
+3. Eraser
 
-The third button is the eraser which allows you to choose a specific area to white out
+4. Rectangle Tool
 
-The fourth button is the rectangle tool button which allows you to draw rectangles of any size
+5. Circle Tool
 
-The fifth button is the circle tool that allows you draw circles of any size
+6. Undo stroke
 
-The sixth button is the undo button which allows you to undo your last stroke
+7. Redo stroke
 
-The seventh button is the redo button which allows you redo your undo
+8. Color Picker
 
-The color picker allows you to change your pen to any color you want
-
-The slider changes the thickness of you pen
+9. Pen/Eraser Thickness
